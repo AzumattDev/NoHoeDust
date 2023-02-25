@@ -14,7 +14,7 @@ namespace NoHoeDust
     public class NoHoeDustPlugin : BaseUnityPlugin
     {
         internal const string ModName = "NoHoeDust";
-        internal const string ModVersion = "1.0.1";
+        internal const string ModVersion = "1.0.2";
         internal const string Author = "Azumatt";
         private const string ModGUID = Author + "." + ModName;
         private readonly Harmony _harmony = new(ModGUID);
@@ -37,6 +37,7 @@ namespace NoHoeDust
     #region Just In Case
 
     [HarmonyPatch(typeof(TerrainModifier), nameof(TerrainModifier.OnPlaced))]
+    [HarmonyPriority(Priority.VeryHigh)]
     static class TerrainModifierAwakePatch
     {
         static void Prefix(TerrainOp __instance)
@@ -53,6 +54,7 @@ namespace NoHoeDust
     }
 
     [HarmonyPatch(typeof(TerrainOp), nameof(TerrainOp.OnPlaced))]
+    [HarmonyPriority(Priority.VeryHigh)]
     static class TerrainOpAwakePatch
     {
         static void Prefix(TerrainOp __instance)
@@ -71,6 +73,7 @@ namespace NoHoeDust
     [HarmonyPatch(typeof(ZNetScene), nameof(ZNetScene.Awake))]
     static class ZNetSceneAwakePatch
     {
+        [HarmonyPriority(Priority.Last)]
         static void Postfix(ZNetScene __instance)
         {
             NoHoeDustPlugin.NoHoeDustLogger.LogDebug("ZNetScene Awake Postfix, turning off build dust");
@@ -95,6 +98,7 @@ namespace NoHoeDust
     [HarmonyPatch(typeof(Player), nameof(Player.PlacePiece))]
     static class PiecePlacePiecePatch
     {
+        [HarmonyPriority(Priority.VeryHigh)]
         static void Prefix(Player __instance, ref Piece piece)
         {
             // cache the piece.gameObject.name
