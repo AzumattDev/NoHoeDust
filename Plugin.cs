@@ -14,7 +14,7 @@ namespace NoHoeDust
     public class NoHoeDustPlugin : BaseUnityPlugin
     {
         internal const string ModName = "NoHoeDust";
-        internal const string ModVersion = "1.0.2";
+        internal const string ModVersion = "1.0.3";
         internal const string Author = "Azumatt";
         private const string ModGUID = Author + "." + ModName;
         private readonly Harmony _harmony = new(ModGUID);
@@ -40,7 +40,7 @@ namespace NoHoeDust
     [HarmonyPriority(Priority.VeryHigh)]
     static class TerrainModifierAwakePatch
     {
-        static void Prefix(TerrainOp __instance)
+        static void Prefix(TerrainModifier __instance)
         {
             // Make the __instance.m_onPlacedEffect an empty EffectList to prevent the hoe dust from spawning
             __instance.m_onPlacedEffect = new EffectList();
