@@ -5,7 +5,6 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
-using ServerSync;
 using UnityEngine;
 
 namespace NoHoeDust
@@ -14,13 +13,12 @@ namespace NoHoeDust
     public class NoHoeDustPlugin : BaseUnityPlugin
     {
         internal const string ModName = "NoHoeDust";
-        internal const string ModVersion = "1.0.3";
+        internal const string ModVersion = "1.0.4";
         internal const string Author = "Azumatt";
         private const string ModGUID = Author + "." + ModName;
         private readonly Harmony _harmony = new(ModGUID);
 
-        public static readonly ManualLogSource NoHoeDustLogger =
-            BepInEx.Logging.Logger.CreateLogSource(ModName);
+        public static readonly ManualLogSource NoHoeDustLogger = BepInEx.Logging.Logger.CreateLogSource(ModName);
 
         public void Awake()
         {
